@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chance of Getting a Boyfriend or Girlfriend</title>
+    <style>
+      body {
+        background-color: #fefefe;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+      h2 {
+        color: #ff6b6b;
+      }
+      select,
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        width: 100%;
+        background-color: #ff6b6b;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #ff4b4b;
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2 id="main-heading">Chance of Getting a Partner</h2>
+
+      <select id="gender" onchange="updateHeading()" required>
+        <option disabled selected>Select your gender</option>
+        <option value="boy">Boy</option>
+        <option value="girl">Girl</option>
+      </select>
+
+      <select id="degree" required>
+        <option disabled selected>Select your degree</option>
+        <option>B.Tech</option>
+        <option>M.Tech</option>
+        <option>PhD</option>
+      </select>
+
+      <select id="height" required>
+        <option disabled selected>Select your height</option>
+        <option><5ft</option>
+        <option>5ft-6ft</option>
+        <option>>6ft</option>
+      </select>
+
+      <select id="internship" required>
+        <option disabled selected>Select internship status</option>
+        <option>Yaa cut off hi paar nhi ho rha hai</option>
+        <option>Karli 2 internship</option>
+        <option>Under process hai bhai</option>
+      </select>
+
+      <select id="coffee" required>
+        <option disabled selected>Starbucks ki coffee ka name</option>
+        <option>If don't know then type '0'</option>
+        <option>Latte</option>
+        <option>Cappuccino</option>
+        <option>Mocha</option>
+      </select>
+
+      <select id="resume" required>
+        <option disabled selected>Resume Score</option>
+        <option>0-30</option>
+        <option>30-70</option>
+        <option>70-100</option>
+      </select>
+
+      <select id="college" required>
+        <option disabled selected>Select your college</option>
+        <option>GITS</option>
+        <option>IIT</option>
+        <option>SARKARI</option>
+      </select>
+
+      <button onclick="calculate()">Calculate</button>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      function updateHeading() {
+        const gender = document.getElementById("gender").value;
+        const heading = document.getElementById("main-heading");
+
+        if (gender === "boy") {
+          heading.textContent = "Chance of Getting a Girlfriend";
+        } else if (gender === "girl") {
+          heading.textContent = "Chance of Getting a Boyfriend";
+        }
+      }
+
+      function calculate() {
+        const selects = document.querySelectorAll("select");
+        for (let select of selects) {
+          if (select.selectedIndex === 0) {
+            alert("Please fill all the fields!");
+            return;
+          }
+        }
+
+        const gender = document.getElementById("gender").value;
+        const result = document.getElementById("result");
+
+        const boyRoasts = [
+          "Even your shadow left after seeing your dating hopes.",
+          "You're not single by choice, you're single by public demand.",
+          "Bhai, even your imaginary girlfriend ghosted you.",
+          "Tera rishta toh ChatGPT bhi fix nahi kar sakta.",
+          "She said 'it's not you' — but let's be honest, it's 100% you.",
+          "Bro, even Excel has more dates than you.",
+          "You're not even in the friendzone. You're in the 'who is this?' zone.",
+          "Bhai, tera glow-up kabhi software update ke saath nahi aayega.",
+        ];
+
+        const girlRoasts = [
+          "Queen? More like Drama Department Head.",
+          "Still waiting for your personality to load… please wait.",
+          "Your toxic traits applied for permanent residency.",
+          "You're not high maintenance, you're just low effort.",
+          "Your attitude got more filters than your selfies.",
+          "Even red flags avoid you now — they know you're competition.",
+          "You're not a snack, you're the leftover group project no one wants.",
+          "He didn’t ghost you — he just saw the real you.",
+          "You're the reason 'it’s complicated' exists as a relationship status.",
+        ];
+
+        const roasts = gender === "boy" ? boyRoasts : girlRoasts;
+
+        let index = 0;
+        result.innerHTML = ""; // Clear previous result if any
+
+        const interval = setInterval(() => {
+          const p = document.createElement("p");
+          p.textContent = roasts[index];
+          result.appendChild(p);
+          index++;
+
+          if (index === roasts.length) {
+            clearInterval(interval); // Stop once all are shown
+          }
+        }, 1000); // 1-second delay between roasts
+      }
+    </script>
+  </body>
+</html>
